@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import './App.css'
 
-function App() {
+const App = () => {
+  const [details, setDetails] = useState();
+  const [saveDetails, setSaveDetails] = useState([]);
+  const handleSubmit = () => {
+    setSaveDetails((oldItems) => {
+      return [...oldItems, details];
+    });
+    setDetails("")
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div  className="wrap">
+        <div className="search">
+      <input
+        className="abc"                                                  
+        type="text"
+        value={details}
+        onChange={(e) => setDetails(e.target.value)}
+        placeholder="search"
+      />
+      <button className="Btn" onClick={handleSubmit}>
+         +
+      </button></div>
+      {saveDetails.map((item) => {
+        return <li className="qrs" key={item.id}> {item}</li>;
+      })}
     </div>
   );
-}
+};
 
 export default App;
